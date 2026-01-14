@@ -1,155 +1,227 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, Container, Stack } from "@mui/material";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import Spline from "@splinetool/react-spline";
-import { useState, useEffect } from "react";
-import FloatingLines from "./FloatingLines";
+import Spline from '@splinetool/react-spline';
 
-const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; // Simplified set
 
-const DecryptText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
-  const [displayText, setDisplayText] = useState(() =>
-    text.split("").map(() => characters[Math.floor(Math.random() * characters.length)]).join("")
-  );
 
-  useEffect(() => {
-    let iteration = 0;
-    let interval: any = null;
 
-    const startAnimation = () => {
-      interval = setInterval(() => {
-        setDisplayText(
-          text
-            .split("")
-            .map((char, index) => {
-              if (index < iteration) {
-                return text[index];
-              }
-              // Keep spaces as spaces to prevent word-jump
-              if (char === " ") return " ";
-              return characters[Math.floor(Math.random() * characters.length)];
-            })
-            .join("")
-        );
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2, delayChildren: 0.1 }
+  }
+};
 
-        if (iteration >= text.length) {
-          clearInterval(interval);
-          setDisplayText(text);
-        }
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+};
 
-        iteration += 0.15; // Slightly faster for better feel
-      }, 30);
-    };
-
-    const timeout = setTimeout(startAnimation, delay);
-
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
-    };
-  }, [text, delay]);
-
-  return <Box component="span" sx={{ display: "inline-block", minWidth: `${text.length}ch` }}>{displayText}</Box>;
+const imageVariants = {
+  hidden: { opacity: 0, x: 100, scale: 0.95 },
+  visible: { opacity: 1, x: 0, scale: 1, transition: { duration: 0.8, delay: 0.4 } }
 };
 
 export default function Hero() {
-  const navigate = useNavigate();
-
   return (
     <Box
       sx={{
-        display: "grid",
-        gridTemplateColumns: { xs: "1fr", md: "1fr 1.2fr" },
-        gap: { xs: 4, md: 6 },
-        px: { xs: 4, md: 8 },
-        pt: { xs: 6, md: 8 },
-        pb: { xs: 2, md: 2 },
-        alignItems: "center",
-        minHeight: "80vh",
-        overflow: "hidden",
-        position: "relative",
-        bgcolor: "#ffffff" // Explicit white background
+        width: "100%",
+        bgcolor: "transparent", // Use global Liquid Background
+        pt: { xs: 16, md: 12 },
+        pb: 8,
+        display: 'flex',
+        justifyContent: 'center',
+        overflow: "hidden", // Prevent overflow from glow/animations
       }}
     >
-      {/* FloatingLines Background */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: 0, // Set to 0, text is at 1. Background white is inherited/implicit at -1 sort of.
-          opacity: 1 // Full opacity for lines
-        }}
-      >
-        <FloatingLines
-          lineCount={[8]}
-          lineDistance={[0.2]}
-          animationSpeed={0.5}
-          linesGradient={['#8A2BE2', '#4B0082']} // Violet colors
-          mixBlendMode="normal"
-        />
-      </Box>
+      <Container maxWidth={false} sx={{ maxWidth: "1250px", px: { xs: 2, md: 4 } }}>
+        <Box sx={{ position: "relative" }}> {/* Wrapper for layering */}
 
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        style={{ position: 'relative', zIndex: 1 }}
-      >
-        <Typography
-          variant="h2"
-          sx={{
-            fontWeight: 900,
-            fontSize: { xs: "4rem", md: "6rem" },
-            lineHeight: 1.1,
-            letterSpacing: "-0.03em",
-            fontFamily: "monospace",
-            color: "#000" // Black text for white bg
-          }}
-        >
-          <DecryptText text="CYBER" /> <br />
-          <span style={{
-            background: "linear-gradient(90deg, #8A2BE2, #DA70D6)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent"
-          }}>
-            <DecryptText text="SECURITY" delay={500} />
-          </span>
-        </Typography>
+          {/* Background Glow removed for Plasma visibility */}
 
-        <Box mt={5} display="flex" gap={2}>
-          <Button
-            variant="contained"
-            size="large"
+
+          <Box
             sx={{
-              background: "linear-gradient(45deg, #8A2BE2, #4B0082)", // Violet Gradient
-              color: "#fff",
-              borderRadius: "50px",
-              px: 6,
-              py: 2,
-              fontSize: "1.1rem",
-              fontWeight: 700,
-              textTransform: "none",
-              boxShadow: "0 10px 20px rgba(138, 43, 226, 0.3)",
-              "&:hover": {
-                boxShadow: "0 15px 30px rgba(138, 43, 226, 0.5)",
-                transform: "translateY(-2px)"
-              },
-              transition: "all 0.3s ease"
-            }}
-            onClick={() => navigate("/contact")}
-          >
-            Get Started
-          </Button>
-        </Box>
-      </motion.div>
+              // Layout & Positioning
+              position: "relative",
+              zIndex: 1,
+              px: { xs: 3, md: 8, lg: 12 },
+              minHeight: { xs: "auto", md: "600px" },
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              pb: { xs: 8, md: 0 },
+              borderRadius: { xs: "32px", md: "48px" },
+              overflow: "hidden",
 
-      {/* Spline Restored */}
-      <Box sx={{ height: "100%", minHeight: "500px", display: { xs: "none", md: "block" }, position: 'relative', zIndex: 1 }}>
-        <Spline scene="https://prod.spline.design/JIp1buFm132wAPfM/scene.splinecode" />
-      </Box>
+              /* Glass Effect – realistic */
+              background:
+                "linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02))",
+              backdropFilter: "blur(22px) saturate(160%)",
+              WebkitBackdropFilter: "blur(22px) saturate(160%)",
+
+              border: "1px solid rgba(255,255,255,0.16)",
+
+              boxShadow: `
+              // 0 40px 90px rgba(0, 0, 0, 0.45),
+              // inset 0 1px 0 rgba(255,255,255,0.01),
+              // inset 0 -1px 0 rgba(255,255,255,0.12)
+              // `,
+
+              /* Light reflection */
+              "&::before": {
+                content: '""',
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(120deg, transparent 38%, rgba(255,255,255,0.01), transparent 62%)",
+                opacity: 0.35,
+                pointerEvents: "none",
+              },
+
+              /* Micro-noise (realism) */
+              "&::after": {
+                content: '""',
+                position: "absolute",
+                inset: 0,
+                background:
+                  "url('data:image/svg+xml;utf8,\
+<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"120\" height=\"120\">\
+<filter id=\"n\">\
+<feTurbulence type=\"fractalNoise\" baseFrequency=\"0.9\" numOctaves=\"3\"/>\
+</filter>\
+<rect width=\"120\" height=\"120\" filter=\"url(%23n)\" opacity=\"0.025\"/>\
+</svg>')",
+                mixBlendMode: "overlay",
+                pointerEvents: "none",
+              },
+
+            }}
+          >
+            <Stack
+              direction={{ xs: "column", md: "row" }}
+              spacing={2}
+              alignItems="center"
+              justifyContent="space-between"
+              sx={{ width: "100%", position: "relative", zIndex: 2 }}
+            >
+              {/* Left Content */}
+              <Box
+                sx={{ width: { xs: "100%", md: "52%" }, pr: { md: 0 }, pl: { md: 2 }, textAlign: { xs: "center", md: "left" } }}
+              >
+                <motion.div variants={containerVariants} initial="hidden" animate="visible">
+                  <motion.div variants={itemVariants}>
+                    <Typography
+                      variant="h1"
+                      sx={{
+                        fontFamily: "'Outfit', sans-serif",
+                        fontSize: { xs: "2.5rem", md: "3.5rem", lg: "4.2rem" },
+                        lineHeight: 1.1,
+                        mb: 3,
+                        letterSpacing: "-0.04em",
+                        fontWeight: 600,
+                        color: "#fff",
+                        textShadow: "0px 0px 20px rgba(0,0,0,0.5)" // Better readability on glass
+                      }}
+                    >
+                      Defending the Digital World <br />
+                      <Box component="span" sx={{ color: "#9D5BF3" }}>with Intelligent Security</Box>
+                    </Typography>
+                  </motion.div>
+
+                  <motion.div variants={itemVariants}>
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        fontFamily: "'Manrope', sans-serif",
+                        color: "#E0E0E0", // Brighter text for contrast
+                        fontSize: { xs: "1.1rem", md: "1.2rem" },
+                        mb: 5,
+                        maxWidth: "520px",
+                        lineHeight: 1.6,
+                        letterSpacing: "-0.01em",
+                        mx: { xs: "auto", md: 0 }
+                      }}
+                    >
+                      From vulnerability assessment to real-time threat response, we deliver end-to-end cyber security solutions built for the modern internet.
+                    </Typography>
+                  </motion.div>
+
+                  <motion.div variants={itemVariants}>
+                    <Stack direction={{ xs: "column", sm: "row" }} spacing={{ xs: 2, sm: 3 }} alignItems="center" justifyContent={{ xs: "center", md: "flex-start" }}>
+                      <Button
+                        variant="contained"
+                        sx={{
+                          bgcolor: "#914BF1",
+                          color: "#fff",
+                          borderRadius: "14px",
+                          px: 4.5,
+                          py: 1.6,
+                          textTransform: "none",
+                          fontFamily: "'Outfit', sans-serif",
+                          fontSize: "1.05rem",
+                          fontWeight: 600,
+                          width: { xs: "100%", sm: "auto" },
+                          boxShadow: "0 4px 15px rgba(145, 75, 241, 0.3)",
+                          "&:hover": {
+                            bgcolor: "#7A3CC1",
+                            boxShadow: "0 6px 20px rgba(145, 75, 241, 0.5)",
+                          }
+                        }}
+                      >
+                        Let's Get Started
+                      </Button>
+                      <Button
+                        variant="text"
+                        sx={{
+                          color: "#FFFFFF",
+                          textTransform: "none",
+                          fontFamily: "'Outfit', sans-serif",
+                          fontSize: "1.05rem",
+                          fontWeight: 500,
+                          opacity: 0.9,
+                          "&:hover": { bgcolor: "rgba(255,255,255,0.05)", opacity: 1 }
+                        }}
+                      >
+                        Learn More
+                      </Button>
+                    </Stack>
+                  </motion.div>
+                </motion.div>
+              </Box>
+
+              {/* Right Visual */}
+              <Box
+                sx={{ width: { xs: "100%", md: "48%" }, display: "flex", justifyContent: { xs: "center", md: "flex-end" }, position: "relative", mt: { xs: 6, md: 0 } }}
+              >
+                <motion.div
+                  variants={imageVariants}
+                  initial="hidden"
+                  animate="visible"
+                  style={{ width: "100%" }}
+                >
+                  <Box sx={{
+                    width: "100%",
+                    height: "500px",
+                    // Fix for Spline canvas to prevent layout shift or overflow
+                    '& canvas': {
+                      width: '100% !important',
+                      height: '100% !important',
+                      outline: 'none'
+                    }
+                  }}>
+                    <Spline
+                      scene="https://prod.spline.design/ZO4T2ORVXMtwxBvh/scene.splinecode"
+                    />
+                  </Box>
+                </motion.div>
+              </Box>
+            </Stack>
+          </Box>
+        </Box>
+      </Container>
     </Box>
   );
 }

@@ -2,21 +2,26 @@ import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
-    mode: "light",
-    primary: { main: "#6C63FF" },
-    background: { default: "#F7F8FA" },
+    mode: "dark",
+    primary: { main: "#914BF1" },
+    background: { default: "transparent", paper: "#272829" },
     text: {
-      primary: "#111",
-      secondary: "#555",
+      primary: "#ffffff",
+      secondary: "#b3b3b3",
     },
   },
   shape: {
-    borderRadius: 18,
+    borderRadius: 16,
   },
   typography: {
-    fontFamily: "Montserrat, sans-serif",
-    h2: { fontWeight: 800 },
-    h4: { fontWeight: 700 },
+    fontFamily: "'Manrope', sans-serif",
+    h1: { fontFamily: "'Outfit', sans-serif", fontWeight: 600 },
+    h2: { fontFamily: "'Outfit', sans-serif", fontWeight: 600 },
+    h3: { fontFamily: "'Outfit', sans-serif", fontWeight: 600 },
+    h4: { fontFamily: "'Outfit', sans-serif", fontWeight: 600 },
+    h5: { fontFamily: "'Outfit', sans-serif", fontWeight: 500 },
+    h6: { fontFamily: "'Outfit', sans-serif", fontWeight: 500 },
+    button: { fontFamily: "'Manrope', sans-serif", fontWeight: 600 },
   },
 });
 

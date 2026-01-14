@@ -41,23 +41,27 @@ const Footer: React.FC = () => {
 
   return (
     /* OUTER WRAPPER */
-    <Box sx={{ bgcolor: "#F4F4F4", pb: 4, pt: 2 }}>
-      <Container maxWidth="lg">
+    <Box sx={{ bgcolor: "transparent", pb: 4, pt: 2, position: "relative", zIndex: 1 }}>
+      <Container maxWidth={false} sx={{ maxWidth: "1250px", px: { xs: 2, md: 4 } }}>
         {/* MAIN CARD */}
         <Box
           ref={footerRef}
           sx={{
-            bgcolor: "#0F0F0F",
+            background: "rgba(30, 30, 30, 0.6)",
+            backdropFilter: "blur(24px) saturate(180%)",
+            WebkitBackdropFilter: "blur(24px) saturate(180%)",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.2)",
             borderRadius: "32px",
             position: "relative",
             overflow: "hidden",
             color: "#ffffff",
-            pt: { xs: 8, md: 6 },
-            pb: 6,
-            px: { xs: 4, md: 6 },
+            pt: { xs: 4, md: 6 },
+            pb: { xs: 4, md: 6 },
+            px: { xs: 3, md: 6 },
           }}
         >
-          <Container maxWidth="lg" disableGutters>
+          <Container maxWidth={false} disableGutters>
             <Grid container spacing={6}>
               {/* LEFT SIDE: LOGO & DESC */}
               <Grid size={{ xs: 12, md: 6 }} className="footer-content">
@@ -176,7 +180,7 @@ const Footer: React.FC = () => {
               sx={{
                 textAlign: "center",
                 fontWeight: 700,
-                fontSize: { xs: "17vw", md: "12rem" },
+                fontSize: { xs: "15vw", md: "12rem" },
                 lineHeight: 0.8,
                 mt: { xs: 8, md: 0 },
                 mb: { xs: -4, md: -3 },

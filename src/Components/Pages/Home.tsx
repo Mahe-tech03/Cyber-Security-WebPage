@@ -1,13 +1,26 @@
 import Hero from "../Specified Components/Hero";
-import Solutions from "../Specified Components/Solutions";
-import FAQs from "../Specified Components/FAQs";
+import Features from "../Specified Components/Features";
+import Integration from "../Specified Components/Integration";
+import CallToAction from "../Specified Components/CallToAction";
+import GSAPReveal from "../ui/GSAPReveal";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <Solutions />
-      <FAQs />
+
+      <Features />
+
+      <GSAPReveal width="100%">
+        <Integration />
+      </GSAPReveal>
+
+      <GSAPReveal width="100%">
+        <CallToAction />
+      </GSAPReveal>
+      
+      {/* <Solutions /> */}
+      {/* <FAQs /> */}
     </>
   );
 }

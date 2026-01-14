@@ -146,7 +146,7 @@ const Navbar: React.FC = () => {
                 alignItems: 'center',
                 mx: isScrolled ? 0 : 'auto',
                 mr: 'auto',
-                backgroundColor: isScrolled ? '#111111' : 'transparent',
+                backgroundColor: isScrolled ? '#000000' : 'transparent',
                 borderRadius: isScrolled ? '10px' : '10px',
                 px: isScrolled ? 1 : 0,
                 py: isScrolled ? 0.8 : 0,
@@ -166,7 +166,7 @@ const Navbar: React.FC = () => {
                     href={item.href}
                     disableRipple
                     sx={{
-                      color: isScrolled ? '#FFFFFF' : 'rgba(0, 0, 0, 0.7)',
+                      color: isScrolled ? '#FFFFFF' : 'rgba(255, 255, 255, 0.7)',
                       fontSize: '0.95rem',
                       fontWeight: 400,
                       textTransform: 'none',
@@ -281,8 +281,8 @@ const Navbar: React.FC = () => {
                 px: 2,
                 py: 1,
                 height: isScrolled ? '45px' : 'auto',
-                backgroundColor: isScrolled ? '#FFFFFF' : '#0A0A0A',
-                color: isScrolled ? '#0A0A0A' : '#FFFFFF',
+                backgroundColor: isScrolled ? '#FFFFFF' : '#FFFFFF',
+                color: isScrolled ? '#0A0A0A' : '#000000',
                 textTransform: 'none',
                 boxShadow: 'none',
                 '&:hover': {
@@ -312,7 +312,7 @@ const Navbar: React.FC = () => {
           {/* Mobile Menu Icon */}
           {isMobile && (
             <Box sx={{ ml: 0 }}>
-              <IconButton onClick={handleDrawerToggle} sx={{ color: isScrolled || mobileOpen ? '#0A0A0A' : '#0A0A0A' }}>
+              <IconButton onClick={handleDrawerToggle} sx={{ color: isScrolled || mobileOpen ? '#FFFFFF' : '#FFFFFF' }}>
                 {mobileOpen ? (
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M18 6L6 18" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />

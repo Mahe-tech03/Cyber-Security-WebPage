@@ -95,31 +95,33 @@ const Faq: React.FC = () => {
       component="section"
       ref={sectionRef}
       sx={{
-        py: { xs: 8, md: 10 },
-        bgcolor: '#F4F4F4',
-        color: '#0A0A0A',
+        py: { xs: 6, md: 10 },
+        bgcolor: 'transparent',
+        color: '#ffffff',
+        position: 'relative',
+        zIndex: 1,
       }}
     >
       <Container maxWidth="lg">
         {/* Title Section */}
-        <Box ref={headerRef} sx={{ textAlign: 'center', mb: 12 }}>
+        <Box ref={headerRef} sx={{ textAlign: 'center', mb: { xs: 6, md: 12 } }}>
 
           <Typography
             variant="h1"
             sx={{
               fontWeight: 500,
-              fontSize: { xs: '2.5rem', md: '3rem' },
-              mb: 3,
+              fontSize: { xs: '2rem', md: '3rem' },
+              mb: 2,
               lineHeight: 1.1,
               letterSpacing: '-0.03em',
-              color: '#0A0A0A',
+              color: '#ffffff',
             }}
           >
             Explore Our FAQs
           </Typography>
           <Typography
             sx={{
-              color: 'rgba(0,0,0,0.6)',
+              color: 'rgba(255,255,255,0.6)',
               fontSize: { xs: '1.1rem', md: '1.2rem' },
               lineHeight: 1.6,
               maxWidth: 580,
@@ -144,14 +146,14 @@ const Faq: React.FC = () => {
                     fontWeight: 400,
                     fontSize: { xs: '1.3rem', md: '1.2rem' },
                     mb: 2.5,
-                    color: '#0A0A0A',
+                    color: '#ffffff',
                   }}
                 >
                   {faq.question}
                 </Typography>
                 <Typography
                   sx={{
-                    color: 'rgba(10,10,10,0.5)',
+                    color: 'rgba(255,255,255,0.5)',
                     fontSize: '1rem',
                     lineHeight: 1.7,
                     fontWeight: 400
